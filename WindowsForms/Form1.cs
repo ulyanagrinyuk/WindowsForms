@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,8 +27,9 @@ namespace WindowsForms
 			visible_controls = false;
 			btnHideControls.Visible = false;
 			btnClose.Visible = false;
+			
 		}
-		
+
 		private void SetShowDate( bool show_date )
 		{
 			this.show_date = show_date;
@@ -43,12 +45,15 @@ namespace WindowsForms
 			this.ShowInTaskbar = visible_controls;
 			this.cbShowDate.Visible = visible_controls;
 
+			this.btnFont.Visible = visible_controls;
 			this.btnHideControls.Visible = visible_controls;
 			this.btnClose.Visible = visible_controls;
 			//this.notifyIcon1.Visible = !visible_controls;
 
 			this.showControlsToolStripMenuItem.Checked = visible_controls;
 		}
+
+		
 		private void timer1_Tick(object sender, EventArgs e)
 		{
 			label1.Text = DateTime.Now.ToString("HH:mm:ss");
@@ -110,6 +115,25 @@ namespace WindowsForms
 		private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
 		{
 			label1_DoubleClick(sender, e);
+		}
+
+		private void btnFont_Click(object sender, EventArgs e)
+		{
+			Fonts font = new Fonts();
+			font.ShowDialog(this);
+			label1.Font = font.OldFont;
+		}
+
+		private void foregroundToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			colorDialog1.ShowDialog(this);
+			label1.ForeColor = colorDialog1.Color;
+		}
+
+		private void backgroundToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			colorDialog1.ShowDialog(this);
+			label1.BackColor = colorDialog1.Color;
 		}
 	}
 }
